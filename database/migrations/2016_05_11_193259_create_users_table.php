@@ -17,8 +17,8 @@ class CreateUsersTable extends Migration {
 		  $table->increments('id');
 
             // Cached from GitHub
-           $table->string('github_id')->unique();
-           $table->string('facebook_id')->unique();
+           $table->string('github_id');
+           $table->string('facebook_id');
            $table->string('name');
            $table->string('email');
            $table->string('avatar');
