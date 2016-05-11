@@ -10,7 +10,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Light IT</title>
+    <title>test task for Light IT</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet">
@@ -40,6 +40,8 @@
        
     </nav>
 
+
+
     <!-- Page Content -->
     <div class="container">
 
@@ -48,10 +50,10 @@
                 <h1>test task for light it</h1><br>
                <? if (Auth::check())
 				{
-				  echo "authenticated";
+				  echo "вы вошли";
 				  echo "<br><a href='/auth/logout'>logout</a>";
 				}else{
-					echo "not authenticated";
+					echo "Для добавления и комментирования сообщений выполните вход";
 					echo "<br><a href='/auth'>login</a>";
 				}?>
         </div>
@@ -67,12 +69,14 @@
 	          Comments
 	        </div>
 	        <div class="panel-body comments">
+	        @if(Auth::check())
 	          <form action="/add" method="post">
 				    <input type="hidden" name="_token" id="csrf-token" value="{{ csrf_token() }}" />
 				    <textarea class="form-control" placeholder="Write your comment" name="post_text" rows="5"></textarea>
 					<br>
 					<input type="submit" class="btn btn-info pull-right">
 			   </form>
+			   @endif
 	          <div class="clearfix"></div>
 	          <hr>
 	          <ul class="media-list">
@@ -80,8 +84,6 @@
 	            <!--here-->
 
 	            <?//dd($data);?>
-
-
 
 				@foreach ($data as $post)
 					<div class="comment">
@@ -97,11 +99,14 @@
 		                  </p>
 		                  
 		                  <div class="reply">
+		                  	@if(Auth::check())
 		                  	<div class="reply_btn">
-		                  		<span class="text-muted pull-right">
+		                  		<span class="text-muted pull-left">
 				                	<small class="btn btn-danger btn-xs" id="reply"><i class="fa fa-times"></i> ответить</small>
 			              		</span>
 		                  	</div>
+		                  	
+		                  	@endif
 		                  	
 		                  	<div class="reply_form">
 			                  	<hr>
@@ -114,12 +119,26 @@
 						        </form>
 					        </div>
 		                  </div>
+
 		                <div class="clearfix"></div>
 		              </div>
+
 	              </div>
-	              @if (!empty($post['childs']))
-				  	  @include('comments', ['data'=>$post['childs']])
-				  @endif
+	              <div class="comments" id="child-comments">
+
+	                @if (!empty($post['childs']))
+		                <div class="comment_show_btn">
+		               		<span class="text-muted pull-right">
+				               	<small class="btn btn-default btn-xs" id="reply"><i class="fa fa-times"></i>показать комментарии</small>
+			           		</span>
+		                </div>
+		            @endif
+
+	              	@if (!empty($post['childs']))
+					     @include('comments', ['data'=>$post['childs']])
+					@endif
+	              </div>
+	              
 	                
 				@endforeach
 
@@ -131,12 +150,13 @@
 	    </div>
 	  </div>
 	</div>
-	<form  action="/add" method="POST">
-	  <input type="hidden" value="{{ csrf_token() }}" name="_token">
-		<input type="text" name="data">
-		<input type="submit">
-	</form>
     <!-- /.container -->
+
+    
+    <div id="preloader">
+	  <div id="status">&nbsp;</div>
+	</div>
+
 
     <!-- jQuery Version 1.11.1 -->
      <script src="{{asset('js/jquery.js')}}"></script>

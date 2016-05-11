@@ -1,50 +1,33 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Laravel</title>
-
-        <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
-
-        <style>
-            html, body {
-                height: 100%;
+        <title>Авторизация</title>
+        <link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet">
+         <link href="{{asset('css/main.css')}}" rel="stylesheet">
+        <link href="{{asset('css/bootstrap-social.css')}}" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css"> 
+        <style type="text/css">
+            div#main-container {
             }
-
-            body {
-                margin: 0;
-                padding: 0;
-                width: 100%;
-                display: table;
-                font-weight: 100;
-                font-family: 'Lato';
-            }
-
-            .container {
-                text-align: center;
-                display: table-cell;
-                vertical-align: middle;
-            }
-
-            .content {
-                text-align: center;
-                display: inline-block;
-            }
-
-            .title {
-                font-size: 96px;
-            }
+            
         </style>
     </head>
     <body>
-        <div class="container">
-            <div class="content">
-                <div class="title">Auth</div>
-                <div class="col-md-12 text-center">
-                    <p>Login with</p>
-                    <a href="{!!URL::to('github')!!}">Login with Github</a>
-                    
-                </div>
-            </div>
+        
+    <div id="main-container" class="container-fluid">
+      <div class="row">
+        <div id="auth-form">
+         <a class="btn btn-block btn-social btn-github" href="{!!URL::to('github')!!}">
+            <span class="fa fa-github"></span>войти с помощью Github
+        </a>
+
+        <a class="btn btn-block btn-social btn-facebook" href="{!!URL::to('facebook')!!}">
+            <span class="fa fa-facebook"></span> Sign in with Facebook
+        </a>
+
         </div>
+      </div>
+    </div>
+
     </body>
 </html>

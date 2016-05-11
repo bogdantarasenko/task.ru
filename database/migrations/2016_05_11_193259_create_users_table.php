@@ -18,6 +18,7 @@ class CreateUsersTable extends Migration {
 
             // Cached from GitHub
            $table->string('github_id')->unique();
+           $table->string('facebook_id')->unique();
            $table->string('name');
            $table->string('email');
            $table->string('avatar');
@@ -25,6 +26,7 @@ class CreateUsersTable extends Migration {
            $table->rememberToken();
            $table->timestamps();
 		});
+	
 	}
 
 	/**

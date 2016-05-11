@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use App\Posts;
+use DB;
 
 class MainController extends Controller {
 
@@ -34,14 +35,19 @@ class MainController extends Controller {
 	public function index()
 	{
 		$posts = Posts::all()->toArray();
+		//$posts = DB::table('posts')->orderBy('id', 'desc')->get();
+		//$data = array_reverse($posts);
+		//dd($res);
+		//$data = $posts->toAr
 		//$posts = Posts::all()->orderBy('id', 'desc');
 		//$res = self::build_tree($posts);
 
 		$new_arr = self::process_arr($posts);
 
 		
-		$tree_of_comments = self::build_tree($new_arr);
+		$tree_of_comments = array_reverse(self::build_tree($new_arr));
 
+		//dd(array_reverse($tree_of_comments));
 
 		return view('posts',['data'=>$tree_of_comments]);
 	}

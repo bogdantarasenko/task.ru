@@ -8,7 +8,7 @@ class AccountController extends Controller {
 
   public function __construct()
   {
-    $this->middleware('guest');
+    //$this->middleware('guest');
   }
 
   public function github_redirect() {
@@ -23,11 +23,31 @@ class AccountController extends Controller {
     // Do your stuff with user data.
     //var_dump($user);die;
 
-    $authUser = $this->findOrCreateUser($user);
+    $authUser = $this->findOrCreateUser($user,'github');
 
     Auth::login($authUser, true);
 
     return redirect('/');
+  }
+
+  public function facebook_redirect(){
+
+    return Socialize::driver('facebook')->redirect(); 
+
+  }
+
+  public function facebook(){
+
+    $user = Socialize::with('facebook')->user();
+
+    //var_dump($user);die;
+
+    $authUser = $this->findOrCreateUser($user,'facebook');
+
+    Auth::login($authUser, true);
+
+    return redirect('/');
+
   }
 
   public function logout(){
@@ -37,18 +57,38 @@ class AccountController extends Controller {
     return Redirect::to('/');
   }
 
-  private function findOrCreateUser($githubUser)
-  {
-        if ($authUser = User::where('github_id', $githubUser->id)->first()) {
-            return $authUser;
-        }
+  private function findOrCreateUser($user,$type)
+  { 
 
-        return User::create([
-            'name' => $githubUser->nickname,
-            'email' => $githubUser->email,
-            'github_id' => $githubUser->id,
-            'avatar' => $githubUser->avatar
-        ]);
+        switch ($type) {
+            case 'github':
+                if ($authUser = User::where('github_id', $user->id)->first()) {
+                    return $authUser;
+                }
+
+                return User::create([
+                    'name' => $user->nickname,
+                    'email' => $user->email,
+                    'github_id' => $user->id,
+                    'avatar' => $user->avatar
+                ]);
+
+                break;
+            case 'facebook':
+                if ($authUser = User::where('facebook_id', $user->id)->first()) {
+                    return $authUser;
+                }
+
+                return User::create([
+                    'name' => $user->name,
+                    'email' => $user->email,
+                    'facebook_id' => $user->id,
+                    'avatar' => $user->avatar
+                ]);
+                
+                break;
+        }
+        
   }
 
 }

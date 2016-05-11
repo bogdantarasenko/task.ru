@@ -38,5 +38,10 @@ return [
 		'client_secret' => '053b4def4160d477505f8903abace6e71514582f',
 		'redirect' => 'http://task.ru/socialite/socialite/callback', //Ссылка на перенаправление при удачной авторизации (3)
 	],
+	'facebook' => [
+	    'client_id' => '161943684207569',
+	    'client_secret' => 'a138c7e8b25fa2ba360aa5f713c0e0cf',
+	    'redirect' => 'http://task.ru/socialite/facebook/callback',
+	],
 
 ];

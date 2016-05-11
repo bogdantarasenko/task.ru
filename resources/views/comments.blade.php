@@ -1,5 +1,5 @@
 
-<ul class="media-list">
+<ul class="media-list" >
           <li class="media">
             <?//dd($data);?>
             @foreach ($data as $post)
@@ -16,11 +16,13 @@
 		                  </p>
 		                  
 		                  <div class="reply">
+		                  	@if(Auth::check())
 		                  	<div class="reply_btn">
-		                  		<span class="text-muted pull-right">
+		                  		<span class="text-muted pull-left">
 				                	<small class="btn btn-danger btn-xs" id="reply"><i class="fa fa-times"></i> ответить</small>
 			              		</span>
 		                  	</div>
+		                  	@endif
 		                  	
 		                  	<div class="reply_form">
 			                  	<hr>
@@ -33,12 +35,30 @@
 						        </form>
 					        </div>
 		                  </div>
+
+
 		                <div class="clearfix"></div>
 		              </div>
 	              </div>
-	              @if (!empty($post['childs']))
-				  	  @include('comments', ['data'=>$post['childs']])
-				  @endif
+	              <div class="comments">
+
+	                
+
+	              	@if (!empty($post['childs']))
+					     @include('comments', ['data'=>$post['childs']])
+					@endif
+
+
+					@if (!empty($post['childs']))
+		                <div class="comment_show_btn">
+		               		<span class="text-muted pull-left">
+				               	<small class="btn btn-default btn-xs" id="reply"><i class="fa fa-times"></i>показать комментарии</small>
+			           		</span>
+		                </div>
+		            @endif
+
+	              </div>
+	              <br>
 	                
 				@endforeach
           </li>
