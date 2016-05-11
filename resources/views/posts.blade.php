@@ -45,7 +45,15 @@
 
         <div class="row">
             <div class="col-lg-12 text-center">
-                <h1>test task for light it</h1>
+                <h1>test task for light it</h1><br>
+               <? if (Auth::check())
+				{
+				  echo "authenticated";
+				  echo "<br><a href='/auth/logout'>logout</a>";
+				}else{
+					echo "not authenticated";
+					echo "<br><a href='/auth'>login</a>";
+				}?>
         </div>
         <!-- /.row -->
 
