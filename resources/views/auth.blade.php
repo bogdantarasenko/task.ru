@@ -3,14 +3,9 @@
     <head>
         <title>Авторизация</title>
         <link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet">
-         <link href="{{asset('css/main.css')}}" rel="stylesheet">
+        <link href="{{asset('css/main.css')}}" rel="stylesheet">
         <link href="{{asset('css/bootstrap-social.css')}}" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css"> 
-        <style type="text/css">
-            div#main-container {
-            }
-            
-        </style>
     </head>
     <body>
         

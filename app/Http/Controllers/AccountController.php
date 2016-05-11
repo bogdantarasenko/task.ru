@@ -4,13 +4,13 @@ use Socialize;
 use Auth;
 use App\User;
 class AccountController extends Controller {
-  // To redirect github
+  // Controller for working with authentication
 
   public function __construct()
   {
     //$this->middleware('guest');
   }
-
+  //redirect to github auth
   public function github_redirect() {
 
     return Socialize::with('github')->redirect();
@@ -20,8 +20,6 @@ class AccountController extends Controller {
   public function github() {
 
     $user = Socialize::with('github')->user();
-    // Do your stuff with user data.
-    //var_dump($user);die;
 
     $authUser = $this->findOrCreateUser($user,'github');
 
@@ -29,18 +27,16 @@ class AccountController extends Controller {
 
     return redirect('/');
   }
-
+  //redirect to facebook auth
   public function facebook_redirect(){
 
     return Socialize::driver('facebook')->redirect(); 
 
   }
-
+  //get facebook user data
   public function facebook(){
 
     $user = Socialize::with('facebook')->user();
-
-    //var_dump($user);die;
 
     $authUser = $this->findOrCreateUser($user,'facebook');
 
@@ -56,7 +52,7 @@ class AccountController extends Controller {
 
     return Redirect::to('/');
   }
-
+  //check if user is registered if not registered him 
   private function findOrCreateUser($user,$type)
   { 
 

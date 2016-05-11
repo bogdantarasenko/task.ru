@@ -1,7 +1,7 @@
 
 <ul class="media-list" >
           <li class="media">
-            <?//dd($data);?>
+           
             @foreach ($data as $post)
 					<div class="comment">
 	               
@@ -43,7 +43,7 @@
 	              <div class="comments">
 
 	                
-
+	              	 <!--include comments to the post if they exists -->
 	              	@if (!empty($post['childs']))
 					     @include('comments', ['data'=>$post['childs']])
 					@endif

@@ -35,14 +35,14 @@
 
 <body>
 
-    <!-- Navigation -->
+    <!-- header -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
        
     </nav>
 
 
 
-    <!-- Page Content -->
+    
     <div class="container">
 
         <div class="row">
@@ -56,9 +56,10 @@
 					echo "Для добавления и комментирования сообщений выполните вход";
 					echo "<br><a href='/auth'>login</a>";
 				}?>
-        </div>
+        	</div>
         <!-- /.row -->
 
+    	</div>
     </div>
 
     <div class="container">
@@ -80,11 +81,7 @@
 	          <div class="clearfix"></div>
 	          <hr>
 	          <ul class="media-list">
-	            
-	            <!--here-->
-
-	            <?//dd($data);?>
-
+	          <!--output of our posts -->
 				@foreach ($data as $post)
 					<div class="comment">
 	               
@@ -133,7 +130,7 @@
 			           		</span>
 		                </div>
 		            @endif
-
+		            <!--include comments to the post if they exists -->
 	              	@if (!empty($post['childs']))
 					     @include('comments', ['data'=>$post['childs']])
 					@endif
@@ -150,9 +147,9 @@
 	    </div>
 	  </div>
 	</div>
-    <!-- /.container -->
-
     
+
+    <!-- simple preloadre -->
     <div id="preloader">
 	  <div id="status">&nbsp;</div>
 	</div>

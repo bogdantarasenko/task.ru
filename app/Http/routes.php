@@ -7,8 +7,7 @@ Route::post('/add','MainController@addpost');
 
 Route::post('/addcomment','MainController@addcomment');
 
-//Route::get('home', 'HomeController@index');
-//auth
+//auth routes
 Route::get('/auth/logout','AccountController@logout');
 
 Route::get('/auth', ['middleware' => 'guest','uses'=>'MainController@render_auth']);

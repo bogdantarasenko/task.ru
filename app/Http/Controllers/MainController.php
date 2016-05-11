@@ -6,32 +6,12 @@ use DB;
 
 class MainController extends Controller {
 
-	/*
-	|--------------------------------------------------------------------------
-	| Welcome Controller
-	|--------------------------------------------------------------------------
-	|
-	| This controller renders the "marketing page" for the application and
-	| is configured to only allow guests. Like most of the other sample
-	| controllers, you are free to modify or remove it as you desire.
-	|
-	*/
-
-	/**
-	 * Create a new controller instance.
-	 *
-	 * @return void
-	 */
 	public function __construct()
 	{
 		//$this->middleware('guest');
 	}
 
-	/**
-	 * Show the application welcome screen to the user.
-	 *
-	 * @return Response
-	 */
+	//render main page ,get and process data form db
 	public function index()
 	{
 		$posts = Posts::all()->toArray();
@@ -40,8 +20,6 @@ class MainController extends Controller {
 
 		
 		$tree_of_comments = array_reverse(self::build_tree($new_arr));
-
-		//dd(array_reverse($tree_of_comments));
 
 		return view('posts',['data'=>$tree_of_comments]);
 	}
@@ -54,8 +32,6 @@ class MainController extends Controller {
 	public function addpost(Request $request){
 
 		$post_text = $request->post_text;
-
-		//echo $post_data;
 		
 		$post = new Posts;
 		$post->post_text = $post_text;
@@ -72,8 +48,6 @@ class MainController extends Controller {
 		$parent_id = $request->parent_id;
 		$comment_text  = $request->comment_text;
 
-		//dd($comment_text);
-
 		$post = new Posts;
 		$post->parent_id = $parent_id;
 		$post->post_text = $comment_text;
@@ -85,8 +59,7 @@ class MainController extends Controller {
 		
 	}
 
-
-
+	//making an array from which than we build a tree arr
 	public static function process_arr($data){
 
 		$_comments = [];
@@ -99,6 +72,7 @@ class MainController extends Controller {
 
 	}
 
+	//building a tree from array
 	public static function build_tree($data){
 
 	    $tree = array();
@@ -109,15 +83,12 @@ class MainController extends Controller {
 
 	            $tree[$id] = &$row;
 
-	        }
-
-	        else{
+	        }else{
 
 	            $data[$row['parent_id']]['childs'][$id] = &$row;
 
 	        }
 			
-			//var_dump($row['parent_id']);
 	    }
 
 	    return $tree;
