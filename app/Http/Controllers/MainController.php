@@ -35,12 +35,6 @@ class MainController extends Controller {
 	public function index()
 	{
 		$posts = Posts::all()->toArray();
-		//$posts = DB::table('posts')->orderBy('id', 'desc')->get();
-		//$data = array_reverse($posts);
-		//dd($res);
-		//$data = $posts->toAr
-		//$posts = Posts::all()->orderBy('id', 'desc');
-		//$res = self::build_tree($posts);
 
 		$new_arr = self::process_arr($posts);
 
@@ -53,10 +47,12 @@ class MainController extends Controller {
 	}
 
 	public function render_auth(){
+
 		return view('auth');
 	}
 
 	public function addpost(Request $request){
+
 		$post_text = $request->post_text;
 
 		//echo $post_data;
@@ -72,6 +68,7 @@ class MainController extends Controller {
 	}
 
 	public function addcomment(Request $request){
+
 		$parent_id = $request->parent_id;
 		$comment_text  = $request->comment_text;
 
@@ -130,4 +127,3 @@ class MainController extends Controller {
 
 
 }
-//-----------------------

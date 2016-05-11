@@ -66,7 +66,7 @@
 	    <div class="col-md-12">
 	      <div class="panel panel-info">
 	        <div class="panel-heading">
-	          Comments
+	          стена сообщений
 	        </div>
 	        <div class="panel-body comments">
 	        @if(Auth::check())

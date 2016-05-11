@@ -7,7 +7,7 @@ Route::post('/add','MainController@addpost');
 
 Route::post('/addcomment','MainController@addcomment');
 
-Route::get('home', 'HomeController@index');
+//Route::get('home', 'HomeController@index');
 //auth
 Route::get('/auth/logout','AccountController@logout');
 
